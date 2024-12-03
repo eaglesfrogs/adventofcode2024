@@ -1,4 +1,5 @@
-mod day1;
+mod day01;
+mod day02;
 mod util;
 
 use std::env;
@@ -6,7 +7,8 @@ use std::env;
 fn main() {
     for argument in env::args() {
         match argument.as_str() {
-            "day1" => day1::execute(),
+            "day01" => day01::execute(),
+            "day02" => day02::execute(),
             _ => println!("Day {argument} is not yet implemented"),
         }
     }

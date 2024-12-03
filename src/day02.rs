@@ -3,7 +3,7 @@ mod step2;
 
 use crate::util;
 
-const DATA: &str = "src/day1/data";
+const DATA: &str = "src/day02/data";
 
 pub fn execute() {
     let data = util::read_file(DATA);
