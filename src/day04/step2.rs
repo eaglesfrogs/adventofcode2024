@@ -1,21 +1,44 @@
-use regex::Regex;
-
 pub fn execute(data: &Vec<String>) {
-    let re = Regex::new(r"(mul\((\d{1,3}),(\d{1,3})\))|(do\(\))()()|(don't\(\))()()").unwrap();
     let mut total: i32 = 0;
 
-    let mut enabled = true;
+    let mut puzzle = [['.'; 140]; 140];
+
+    let mut row: i32 = 0;
+    let mut col: i32 = 0;
 
     for line in data {
-        for (_, [mul, d1, d2]) in re.captures_iter(line).map(|c| c.extract()) {
-            // println!("{}", mul);
+        col = 0;
+        for c in line.chars() {
+            puzzle[row as usize][col as usize] = c;
+            col += 1;
+        }
+        row += 1;
+    }
 
-            if mul == "do()" {
-                enabled = true;
-            } else if mul == "don't()" {
-                enabled = false;
-            } else if enabled && mul.starts_with("mul") {
-                total += d1.parse::<i32>().unwrap() * d2.parse::<i32>().unwrap();
+    for r in 1..139 {
+        for c in 1..139 {
+            let a_char = puzzle[r][c];
+
+            if a_char == 'A' {
+                if (puzzle[r - 1][c - 1] == 'M'
+                    && puzzle[r - 1][c + 1] == 'M'
+                    && puzzle[r + 1][c - 1] == 'S'
+                    && puzzle[r + 1][c + 1] == 'S')
+                    || (puzzle[r - 1][c - 1] == 'S'
+                        && puzzle[r - 1][c + 1] == 'S'
+                        && puzzle[r + 1][c - 1] == 'M'
+                        && puzzle[r + 1][c + 1] == 'M')
+                    || (puzzle[r - 1][c - 1] == 'M'
+                        && puzzle[r - 1][c + 1] == 'S'
+                        && puzzle[r + 1][c - 1] == 'M'
+                        && puzzle[r + 1][c + 1] == 'S')
+                    || (puzzle[r - 1][c - 1] == 'S'
+                        && puzzle[r - 1][c + 1] == 'M'
+                        && puzzle[r + 1][c - 1] == 'S'
+                        && puzzle[r + 1][c + 1] == 'M')
+                {
+                    total += 1;
+                }
             }
         }
     }

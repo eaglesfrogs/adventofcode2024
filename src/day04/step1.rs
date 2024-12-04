@@ -1,7 +1,7 @@
 use regex::Regex;
 
 pub fn execute(data: &Vec<String>) {
-    let re = Regex::new(r"XMAS|SAMX").unwrap();
+    let re = Regex::new(r"XMAS").unwrap();
     let mut total: i32 = 0;
 
     let mut puzzle = [['.'; 140]; 140];
@@ -9,7 +9,7 @@ pub fn execute(data: &Vec<String>) {
 
     let mut row: i32 = 0;
     let mut col: i32 = 0;
-    
+
     for line in data {
         col = 0;
         for c in line.chars() {
@@ -26,11 +26,12 @@ pub fn execute(data: &Vec<String>) {
         col = 0;
 
         while col < 140 {
-            puzzle_row.push(puzzle[row as usize][col as usize]);            
+            puzzle_row.push(puzzle[row as usize][col as usize]);
             col += 1;
         }
 
-        puzzle_rows.push(puzzle_row);
+        puzzle_rows.push(puzzle_row.clone());
+        puzzle_rows.push(puzzle_row.clone().chars().rev().collect::<String>());
         row += 1;
     }
 
@@ -41,11 +42,12 @@ pub fn execute(data: &Vec<String>) {
         row = 0;
 
         while row < 140 {
-            puzzle_row.push(puzzle[row as usize][col as usize]);            
+            puzzle_row.push(puzzle[row as usize][col as usize]);
             row += 1;
         }
 
-        puzzle_rows.push(puzzle_row);
+        puzzle_rows.push(puzzle_row.clone());
+        puzzle_rows.push(puzzle_row.clone().chars().rev().collect::<String>());
         col += 1;
     }
 
@@ -58,13 +60,14 @@ pub fn execute(data: &Vec<String>) {
         let mut c = col;
 
         while r < 140 && c < 140 {
-            puzzle_row.push(puzzle[r as usize][c as usize]); 
+            puzzle_row.push(puzzle[r as usize][c as usize]);
 
             r += 1;
             c += 1;
         }
 
-        puzzle_rows.push(puzzle_row);
+        puzzle_rows.push(puzzle_row.clone());
+        puzzle_rows.push(puzzle_row.clone().chars().rev().collect::<String>());
 
         if row != 0 {
             row -= 1;
@@ -82,14 +85,14 @@ pub fn execute(data: &Vec<String>) {
         let mut c = col;
 
         while r < 140 && c >= 0 {
-            puzzle_row.push(puzzle[r as usize][c as usize]); 
+            puzzle_row.push(puzzle[r as usize][c as usize]);
 
             r += 1;
-            c -= 1;            
+            c -= 1;
         }
-        println!("{}", puzzle_row);
 
-        puzzle_rows.push(puzzle_row);
+        puzzle_rows.push(puzzle_row.clone());
+        puzzle_rows.push(puzzle_row.clone().chars().rev().collect::<String>());
 
         if col != 139 {
             col += 1;
