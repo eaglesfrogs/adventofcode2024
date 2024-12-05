@@ -4,7 +4,7 @@ pub fn execute(data: &Vec<String>) {
     let mut puzzle = [['.'; 140]; 140];
 
     let mut row: i32 = 0;
-    let mut col: i32 = 0;
+    let mut col: i32;
 
     for line in data {
         col = 0;

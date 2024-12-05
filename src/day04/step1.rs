@@ -8,7 +8,7 @@ pub fn execute(data: &Vec<String>) {
     let mut puzzle_rows: Vec<String> = Vec::new();
 
     let mut row: i32 = 0;
-    let mut col: i32 = 0;
+    let mut col: i32;
 
     for line in data {
         col = 0;
