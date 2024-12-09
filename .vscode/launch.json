@@ -19,7 +19,7 @@
           "kind": "bin"
         }
       },
-      "args": ["day08"],
+      "args": ["day09"],
       "cwd": "${workspaceFolder}"
     },
     {
