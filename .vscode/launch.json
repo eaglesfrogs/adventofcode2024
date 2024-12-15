@@ -19,8 +19,9 @@
           "kind": "bin"
         }
       },
-      "args": ["day14"],
-      "cwd": "${workspaceFolder}"
+      "args": ["day15"],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole"
     },
     {
       "type": "lldb",
