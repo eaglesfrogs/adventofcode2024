@@ -19,7 +19,7 @@
           "kind": "bin"
         }
       },
-      "args": ["day18"],
+      "args": ["day19"],
       "cwd": "${workspaceFolder}",
       "console": "internalConsole"
     },
