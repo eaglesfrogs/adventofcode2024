@@ -1,4 +1,7 @@
-use std::collections::{HashMap, HashSet};
+use std::{
+    collections::{HashMap, HashSet},
+    i8,
+};
 
 pub fn next_number(num: i64) -> i64 {
     let step1mul = num * 64;
@@ -23,7 +26,10 @@ pub fn execute(data: &Vec<String>) {
         let num = line.parse::<i64>().unwrap();
 
         let mut next_num = num;
-        let (mut s0, mut s1, mut s2, mut s3) = (i8::MAX, i8::MAX, i8::MAX, i8::MAX);
+        let mut s0: i8;
+        let mut s1 = i8::MAX;
+        let mut s2 = i8::MAX;
+        let mut s3 = i8::MAX;
 
         let mut seen = HashSet::<(i8, i8, i8, i8)>::new();
 
