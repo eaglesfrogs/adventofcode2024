@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 const MAX_R_C: usize = 141;
 
 #[derive(Copy, Clone, PartialEq, Debug)]
