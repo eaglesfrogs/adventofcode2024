@@ -19,6 +19,7 @@ mod day18;
 mod day19;
 mod day20;
 mod day21;
+mod day22;
 mod util;
 
 use std::env;
@@ -51,6 +52,7 @@ fn main() {
             "day19" => day19::execute(),
             "day20" => day20::execute(),
             "day21" => day21::execute(),
+            "day22" => day22::execute(),
             _ => println!("Day {argument} is not yet implemented"),
         }
     }
