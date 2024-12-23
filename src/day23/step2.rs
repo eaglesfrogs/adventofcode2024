@@ -1,34 +1,36 @@
 use std::collections::{HashMap, HashSet};
 
-pub fn bron_kerbosch(r: HashSet<String>, p: &mut HashSet<String>, x: &mut HashSet<String>, graph: &HashMap<String, HashSet<String>>) -> Vec<HashSet<String>> {
+// https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm
+// https://www.geeksforgeeks.org/maximal-clique-problem-recursive-solution/
+pub fn bron_kerbosch(current_clique: HashSet<String>, potential: &mut HashSet<String>, processed: &mut HashSet<String>, graph: &HashMap<String, HashSet<String>>) -> Vec<HashSet<String>> {
     let mut cliques = Vec::<HashSet<String>>::new();
 
-    if p.is_empty() && x.is_empty() {
-        cliques.push(r.clone());
+    if potential.is_empty() && processed.is_empty() {
+        cliques.push(current_clique.clone());
     }
 
-    while p.is_empty() == false {
-        let v = p.clone().into_iter().next().unwrap();
+    while potential.is_empty() == false {
+        let v = potential.clone().into_iter().next().unwrap();
 
-        let mut new_r = r.clone();
-        new_r.insert(v.clone());
+        let mut new_current_clique = current_clique.clone();
+        new_current_clique.insert(v.clone());
 
-        let mut new_p = HashSet::<String>::new();
-        let mut new_x = HashSet::<String>::new();
-        let new_p_intersection = p.intersection(graph.get(&v).unwrap());
+        let mut new_potential = HashSet::<String>::new();
+        let mut new_processed = HashSet::<String>::new();
+        let new_p_intersection = potential.intersection(graph.get(&v).unwrap());
         for p in new_p_intersection {
-            new_p.insert(p.clone());
+            new_potential.insert(p.clone());
         }
-        let new_x_intersection = x.intersection(graph.get(&v).unwrap());
+        let new_x_intersection = processed.intersection(graph.get(&v).unwrap());
         for x in new_x_intersection {
-            new_x.insert(x.clone());
+            new_processed.insert(x.clone());
         }
 
-        let mut more_cliques = bron_kerbosch(new_r, &mut new_p, &mut new_x, graph);
+        let mut more_cliques = bron_kerbosch(new_current_clique, &mut new_potential, &mut new_processed, graph);
         cliques.append(&mut more_cliques);
 
-        p.remove(&v);
-        x.insert(v.clone());
+        potential.remove(&v);
+        processed.insert(v.clone());
     }
 
     return cliques;
